@@ -1,9 +1,8 @@
 # Darwin Protocol — Miden testnet deployment state.
 #
 # Lists every account, faucet, and contract Darwin has deployed on
-# the public Miden testnet. Each entry includes the account id, the
-# block at which it was first observed, and the deploying transaction
-# id where applicable.
+# the public Miden testnet. Each entry includes the account id and
+# the deploying transaction id where applicable.
 #
 # This file is authoritative for the SDK and the deployment scripts.
 # When you deploy a new component, update this file in the same PR.
@@ -12,24 +11,55 @@
 name = "miden-testnet"
 chain_block_height_at_first_deployment = 695354
 
-# Asset faucets deployed by the Darwin team.
+# Asset faucets deployed by the Darwin team. Each holds a Darwin-
+# controlled signing key and mints to the Darwin test wallet.
 [asset_faucets]
 
 [asset_faucets.dETH]
-account_id = "0xa095d9b3831e96206ff70c2218a6a9"
-symbol = "DETH"
-decimals = 18
-max_supply = 10_000_000
+account_id     = "0xa095d9b3831e96206ff70c2218a6a9"
+symbol         = "DETH"
+decimals       = 18
+max_supply     = 10_000_000
 deployed_by_tx = "0xd2645c81130aafea22c638ef35833b72c2960d8d05845b584ee9dc294c3909e7"
-deployed_at_block = 695524
-first_mint_recipient = "0x5230eb6eb7ba5c80335a738beaf8bc"
+
+[asset_faucets.dWBTC]
+account_id     = "0x7a45cb24ada22120246bcf54196e12"
+symbol         = "DWBTC"
+decimals       = 8
+max_supply     = 1_000_000
+deployed_by_tx = "0x33c2c0248d28f9caee2bcbc474146472a886c082b77986e3873ffa5019d72d99"
+
+[asset_faucets.dUSDT]
+account_id     = "0xd3789f451ddd4720602ba9eb1a268d"
+symbol         = "DUSDT"
+decimals       = 6
+max_supply     = 1_000_000_000
+deployed_by_tx = "0x32cd61c2500c257e60a8026541e65208024e6b4345af5f949a681954cae0f90a"
+
+[asset_faucets.dDAI]
+account_id     = "0xb526deb0408a29207e4f27ed57bf1a"
+symbol         = "DDAI"
+decimals       = 18
+max_supply     = 1_000_000_000
+deployed_by_tx = "0x2d534d2aecc7bded638610b4456780e8bd43c6954b086e7aa0ed4ef0f7c8dfd0"
+
+# The Darwin test wallet that received the first mint from each
+# faucet above. Held by the Darwin team for end-to-end test work.
+[test_wallet]
+account_id = "0x5230eb6eb7ba5c80335a738beaf8bc"
 
 # Darwin Protocol Accounts (one per basket) — not yet deployed.
+# Blocked on the miden-objects / miden-assembly version skew
+# documented in `darwin-protocol/src/component.rs`.
 [protocol_accounts]
-# core_crypto = { account_id = "...", deployed_by_tx = "..." }
-# aggressive  = { ... }
-# conservative = { ... }
+# core_crypto  = { account_id = "...", deployed_by_tx = "..." }
+# aggressive   = { account_id = "...", deployed_by_tx = "..." }
+# conservative = { account_id = "...", deployed_by_tx = "..." }
 
 # Darwin basket-token faucets (DCC, DAG, DCO) — not yet deployed.
+# These are owned by their respective protocol accounts so they only
+# get deployed once the protocol-account deployment is unblocked.
 [basket_token_faucets]
 # DCC = { account_id = "...", deployed_by_tx = "..." }
+# DAG = { account_id = "...", deployed_by_tx = "..." }
+# DCO = { account_id = "...", deployed_by_tx = "..." }
