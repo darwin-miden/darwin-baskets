@@ -6,9 +6,11 @@
 //! the SDK, and any indexer that needs to interpret on-chain basket state.
 
 mod manifest;
+pub mod state;
 mod validation;
 
 pub use manifest::{BasketFees, BasketManifest, BasketRebalancing, Constituent, ManifestFile};
+pub use state::{load_testnet, TestnetDeployment};
 pub use validation::ValidationError;
 
 /// Returns the manifest of the Core Crypto basket bundled with this crate.
