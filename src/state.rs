@@ -29,6 +29,21 @@ pub struct TestnetDeployment {
     pub user_wallet_mints: Vec<UserMintEntry>,
     #[serde(default, rename = "user_deposits")]
     pub user_deposits: Vec<UserDepositEntry>,
+    #[serde(default, rename = "atomic_flow_a_notes")]
+    pub atomic_flow_a_notes: Vec<AtomicFlowANoteEntry>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct AtomicFlowANoteEntry {
+    pub note_id: String,
+    pub note_script_root: String,
+    pub sender_wallet: String,
+    pub target_controller: String,
+    pub asset: String,
+    pub asset_faucet_id: String,
+    pub amount: u64,
+    pub submit_tx: String,
+    pub submission_block: u64,
 }
 
 #[derive(Debug, Clone, Deserialize)]

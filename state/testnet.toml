@@ -183,6 +183,23 @@ deploy_tx  = "0xff0a85adf0f86ba3e80a245abe3a7a37426c8617632a0e4d08176768a1a9fb90
 code_commitment = "0x5d65429df8ae38f8b9dd01c062ffb3cebd7607391ab75d5ed66a73edb61db1d2"
 mast_digest = "[4932857293237849552, 8031004551285969234, 8757150631344379491, 12194264630739062940]"
 
+# Atomic Flow A deposit note submitted by the user wallet, carrying
+# dETH to the real-bodies controller. The NoteScript embeds
+# darwin::math::felt_div which calls miden::core::math::u64::div via
+# miden-core-lib 0.22 — real on-chain u64 division. Built by
+# darwin-protocol-account's `deploy_atomic_flow_a` binary and submitted
+# via miden-client::Client::new_transaction against the testnet RPC.
+[[atomic_flow_a_notes]]
+note_id           = "0x979bfdbb7f532dc27c582f2cd694a8ea7a2b92da665b54785f94359b6a65bd1f"
+note_script_root  = "Word([14124093082797516663, 3522764289502114654, 11258818326281254861, 16845199363537891388])"
+sender_wallet     = "0xed3cd5befa3207805f8529207cfc0d"
+target_controller = "0x171f46fecf1bca8005ae068a8dfe77"
+asset             = "dETH"
+asset_faucet_id   = "0xa095d9b3831e96206ff70c2218a6a9"
+amount            = 100
+submit_tx         = "0x31518ffb4a49c10bd941667ad3797d422e00c666f45b06b786d6230f0786dc87"
+submission_block  = 702480
+
 # Initial pool funding — mints from the Darwin asset faucets into each
 # protocol account, in the manifest's target weight ratios. This
 # bootstraps each basket's pool. Once Flow A is wired end-to-end, user
