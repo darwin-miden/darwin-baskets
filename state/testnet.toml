@@ -200,6 +200,30 @@ amount            = 100
 submit_tx         = "0x31518ffb4a49c10bd941667ad3797d422e00c666f45b06b786d6230f0786dc87"
 submission_block  = 702480
 
+# Second atomic note (self-sufficient inputs version). Submitted by
+# the user wallet, then attempted to be consumed by the controller
+# in the same `flow_a_full` run. Step 1 succeeded. Step 2 reached
+# the kernel asset-conservation invariant — proving the note's
+# darwin::math::felt_div executed on-chain inside the controller's
+# tx context. The next iteration adds the proper note::get_assets +
+# native_account::add_asset kernel calls so the note's vault drains
+# into the controller, satisfying the conservation invariant.
+[[atomic_flow_a_notes]]
+note_id           = "0xd7d0c957bec74431a20eeea34cc5f64a6bb9f2683d966bceece3ef3cc7d765bb"
+sender_wallet     = "0xed3cd5befa3207805f8529207cfc0d"
+target_controller = "0x171f46fecf1bca8005ae068a8dfe77"
+asset             = "dETH"
+asset_faucet_id   = "0xa095d9b3831e96206ff70c2218a6a9"
+amount            = 100
+submit_tx         = "0xb2aa6f9351ce9a6a1ee5464d075dc8dbd211758977589ba0222dfaafd1860c1c"
+submission_block  = 702814
+note_inputs       = "deposit_value=100*1e8, fee_factor=9970, nav=2e11"
+# Controller-side consumption attempt:
+#   tx executed, kernel ran the note script, darwin::math::felt_div
+#   completed (real u64 div executed), then the kernel's asset
+#   conservation invariant rejected because the script did not move
+#   the note's 100 dETH into the controller's vault.
+
 # Initial pool funding — mints from the Darwin asset faucets into each
 # protocol account, in the manifest's target weight ratios. This
 # bootstraps each basket's pool. Once Flow A is wired end-to-end, user
