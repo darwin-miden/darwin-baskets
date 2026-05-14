@@ -1,5 +1,6 @@
 use darwin_baskets::{
-    aggressive, all_m1, conservative, core_crypto, BasketManifest, ValidationError,
+    aggressive, all_m1, all_m1_faucet_aliases, by_symbol, conservative, core_crypto,
+    BasketManifest, ValidationError,
 };
 
 #[test]
@@ -149,6 +150,27 @@ fn rejects_invalid_symbol() {
         m.validate(),
         Err(ValidationError::InvalidSymbol(_))
     ));
+}
+
+#[test]
+fn by_symbol_resolves_known_baskets() {
+    assert_eq!(by_symbol("DCC").map(|b| b.symbol), Some("DCC".to_string()));
+    assert_eq!(by_symbol("DAG").map(|b| b.symbol), Some("DAG".to_string()));
+    assert_eq!(by_symbol("DCO").map(|b| b.symbol), Some("DCO".to_string()));
+    assert!(by_symbol("XYZ").is_none());
+}
+
+#[test]
+fn all_m1_faucet_aliases_is_sorted_and_unique() {
+    let aliases = all_m1_faucet_aliases();
+    let mut expected = vec![
+        "darwin-dai".to_string(),
+        "darwin-eth".to_string(),
+        "darwin-usdt".to_string(),
+        "darwin-wbtc".to_string(),
+    ];
+    expected.sort();
+    assert_eq!(aliases, expected);
 }
 
 #[test]

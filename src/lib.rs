@@ -31,6 +31,30 @@ pub fn all_m1() -> [BasketManifest; 3] {
     [core_crypto(), aggressive(), conservative()]
 }
 
+/// Lookup a manifest by its on-chain symbol. Returns `None` for any
+/// symbol that is not part of the M1 catalogue.
+pub fn by_symbol(symbol: &str) -> Option<BasketManifest> {
+    match symbol {
+        "DCC" => Some(core_crypto()),
+        "DAG" => Some(aggressive()),
+        "DCO" => Some(conservative()),
+        _ => None,
+    }
+}
+
+/// All faucet aliases referenced by any M1 basket, deduplicated and
+/// sorted. Useful for tooling that needs to know which custom asset
+/// faucets must be deployed before any basket can be funded.
+pub fn all_m1_faucet_aliases() -> Vec<String> {
+    let mut aliases: Vec<String> = all_m1()
+        .iter()
+        .flat_map(|b| b.constituents.iter().map(|c| c.faucet_alias.clone()))
+        .collect();
+    aliases.sort();
+    aliases.dedup();
+    aliases
+}
+
 fn load_bundled(contents: &str) -> BasketManifest {
     let manifest =
         BasketManifest::from_toml_str(contents).expect("bundled basket manifest must parse");
