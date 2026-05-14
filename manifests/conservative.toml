@@ -1,0 +1,33 @@
+[basket]
+name = "Conservative"
+symbol = "DCO"
+version = "1.0.0"
+basket_faucet_decimals = 8
+
+[[basket.constituents]]
+faucet_alias = "darwin-wbtc"
+target_weight_bps = 1000
+pragma_pair = "WBTC/USD"
+
+[[basket.constituents]]
+faucet_alias = "darwin-eth"
+target_weight_bps = 1000
+pragma_pair = "ETH/USD"
+
+[[basket.constituents]]
+faucet_alias = "darwin-usdt"
+target_weight_bps = 4000
+pragma_pair = "USDT/USD"
+
+[[basket.constituents]]
+faucet_alias = "darwin-dai"
+target_weight_bps = 4000
+pragma_pair = "DAI/USD"
+
+[basket.rebalancing]
+drift_threshold_bps = 500
+
+[basket.fees]
+mint_fee_bps = 30
+redeem_fee_bps = 30
+management_fee_bps_year = 100

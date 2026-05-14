@@ -1,0 +1,12 @@
+[package]
+name = "darwin-baskets"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Versioned basket manifests for Darwin Protocol (Core Crypto, Aggressive, Conservative) and a Rust loader with validation."
+repository = "https://github.com/darwin-miden/darwin-baskets"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+thiserror = "1"
