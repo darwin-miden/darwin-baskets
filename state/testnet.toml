@@ -57,6 +57,16 @@ account_id      = "0xed3cd5befa3207805f8529207cfc0d"
 first_p2id_tx   = "0xfe0a531e20900297ab6e29ad92cff71e3669dc6d727a76c3b66337043c116bea"
 first_p2id_asset = "1_000_000 base units of public faucet 0x0a7d175ed63ec5200fb2ced86f6aa5"
 
+# Mints the Darwin dETH faucet did directly into the user wallet so
+# the wallet holds a real basket constituent and can drive the user
+# side of Flow A.
+[[user_wallet_mints]]
+asset    = "dETH"
+faucet_id = "0xa095d9b3831e96206ff70c2218a6a9"
+amount   = 5_000
+mint_tx  = "0xdf09fbe2607f42fdfe2faa8197c64a9b62e738af48061b7a45b236c4e2fec095"
+note_id  = "0xa35ab1642a5ab12829ddca56e9b31043c121ae3592af922a53b86307414d9ff3"
+
 # Darwin Protocol Accounts (one per basket). Currently deployed as
 # `RegularAccountUpdatableCode` accounts with placeholder procedure
 # bodies (see `darwin-protocol/crates/darwin-controller-pkg/src/lib.rs`).
