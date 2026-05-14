@@ -56,10 +56,30 @@ account_id = "0x5230eb6eb7ba5c80335a738beaf8bc"
 # aggressive   = { account_id = "...", deployed_by_tx = "..." }
 # conservative = { account_id = "...", deployed_by_tx = "..." }
 
-# Darwin basket-token faucets (DCC, DAG, DCO) — not yet deployed.
-# These are owned by their respective protocol accounts so they only
-# get deployed once the protocol-account deployment is unblocked.
+# Darwin basket-token faucets (DCC, DAG, DCO). Currently deployed as
+# standalone FungibleFaucets owned by the Darwin team's signing key.
+# Once the protocol-account version skew is unblocked, ownership
+# will be transferred (via `miden::standards::access::ownable_two_step`)
+# from the Darwin team to the corresponding protocol account.
 [basket_token_faucets]
-# DCC = { account_id = "...", deployed_by_tx = "..." }
-# DAG = { account_id = "...", deployed_by_tx = "..." }
-# DCO = { account_id = "...", deployed_by_tx = "..." }
+
+[basket_token_faucets.DCC]
+account_id     = "0x2066f2da1f91ba202af5251d39101c"
+symbol         = "DCC"
+decimals       = 8
+max_supply     = 1_000_000_000
+deployed_by_tx = "0x8da73c534cf5802b7a0b30815492d74daab4a14f1ec967b37911c7ed94843e15"
+
+[basket_token_faucets.DAG]
+account_id     = "0xfb6811fd6399df206d44f62800620d"
+symbol         = "DAG"
+decimals       = 8
+max_supply     = 1_000_000_000
+deployed_by_tx = "0x420d8bda3a81ca39d767fe858e8bb662d7ef8852d11fd7c5f0934319367fbf5d"
+
+[basket_token_faucets.DCO]
+account_id     = "0xbe4efc6729eb3220423b7d6d6a0942"
+symbol         = "DCO"
+decimals       = 8
+max_supply     = 1_000_000_000
+deployed_by_tx = "0x9f2cfef38b0a8a29732ce5caf190e578b707e294d611e6f3f8919f50d7747906"
