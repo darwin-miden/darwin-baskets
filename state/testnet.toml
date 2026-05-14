@@ -183,6 +183,19 @@ deploy_tx  = "0xff0a85adf0f86ba3e80a245abe3a7a37426c8617632a0e4d08176768a1a9fb90
 code_commitment = "0x5d65429df8ae38f8b9dd01c062ffb3cebd7607391ab75d5ed66a73edb61db1d2"
 mast_digest = "[4932857293237849552, 8031004551285969234, 8757150631344379491, 12194264630739062940]"
 
+# v2 real-bodies controller. Adds `receive_asset` so the atomic
+# deposit note can drain its vault into the controller. With this
+# proc on the controller, Flow A closes end-to-end on testnet —
+# both halves succeed and the 100 dETH from the user wallet land
+# in this controller's vault. Verified live with
+# `miden client account -s 0xa25aa0b00007688024b74b05a52aab`.
+[protocol_accounts.real_bodies_v2]
+account_id = "0xa25aa0b00007688024b74b05a52aab"
+basket     = "PROTO2"
+mast_digest = "[5787944054101410399, 8047476242844321372, 16140768442101058142, 12522659558018415693]"
+receive_asset_root = "0x75f638c65584d058542bcf4674b066ae394183021bc9b44dc2fdd97d52f9bcfb"
+compute_nav_root   = "0xba1cc592fd6d37a91bd020f9076c7640c3ee210dcc452e6f1aef00c6aa66387e"
+
 # Atomic Flow A deposit note submitted by the user wallet, carrying
 # dETH to the real-bodies controller. The NoteScript embeds
 # darwin::math::felt_div which calls miden::core::math::u64::div via
@@ -223,6 +236,24 @@ note_inputs       = "deposit_value=100*1e8, fee_factor=9970, nav=2e11"
 #   completed (real u64 div executed), then the kernel's asset
 #   conservation invariant rejected because the script did not move
 #   the note's 100 dETH into the controller's vault.
+
+# Third atomic note — kernel-aware version. Note script drains its
+# own assets into the consuming controller's vault via
+# `call.receive_asset`, satisfying the asset-conservation invariant.
+# Both halves of Flow A succeeded end-to-end:
+[[atomic_flow_a_notes]]
+note_id           = "0xb4407ef8c40f6d51796ea22be9a9dbc844adb195d6586f1692e70c20f3b36563"
+sender_wallet     = "0xed3cd5befa3207805f8529207cfc0d"
+target_controller = "0xa25aa0b00007688024b74b05a52aab"
+asset             = "dETH"
+asset_faucet_id   = "0xa095d9b3831e96206ff70c2218a6a9"
+amount            = 100
+submit_tx         = "0xc127a2c9a466f2bc39848cdcf549b5e5a480bb10fd294fd77b453ea930f98187"
+submission_block  = 703309
+consume_tx        = "0x2e211adf6f382749641b9e7324e89c85a0880238df29d154676377166ae856e2"
+consume_block     = 703322
+note_inputs       = "deposit_value=100*1e8, fee_factor=9970, nav=2e11"
+# Post-consume: 100 dETH live in controller 0xa25aa0b00007688024b74b05a52aab vault.
 
 # Initial pool funding — mints from the Darwin asset faucets into each
 # protocol account, in the manifest's target weight ratios. This

@@ -47,6 +47,10 @@ pub struct AtomicFlowANoteEntry {
     pub submission_block: u64,
     #[serde(default)]
     pub note_inputs: Option<String>,
+    #[serde(default)]
+    pub consume_tx: Option<String>,
+    #[serde(default)]
+    pub consume_block: Option<u64>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -149,8 +153,8 @@ mod tests {
     #[test]
     fn every_protocol_account_corresponds_to_a_known_basket() {
         let state = load_testnet();
-        // PROTO is a deployment-tooling prototype, not an M1 basket.
-        let valid_baskets: Vec<&'static str> = vec!["DCC", "DAG", "DCO", "PROTO"];
+        // PROTO / PROTO2 are deployment-tooling prototypes, not M1 baskets.
+        let valid_baskets: Vec<&'static str> = vec!["DCC", "DAG", "DCO", "PROTO", "PROTO2"];
         for (k, pa) in &state.protocol_accounts {
             assert!(
                 valid_baskets.contains(&pa.basket.as_str()),
