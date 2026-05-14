@@ -1,0 +1,35 @@
+# Darwin Protocol — Miden testnet deployment state.
+#
+# Lists every account, faucet, and contract Darwin has deployed on
+# the public Miden testnet. Each entry includes the account id, the
+# block at which it was first observed, and the deploying transaction
+# id where applicable.
+#
+# This file is authoritative for the SDK and the deployment scripts.
+# When you deploy a new component, update this file in the same PR.
+
+[network]
+name = "miden-testnet"
+chain_block_height_at_first_deployment = 695354
+
+# Asset faucets deployed by the Darwin team.
+[asset_faucets]
+
+[asset_faucets.dETH]
+account_id = "0xa095d9b3831e96206ff70c2218a6a9"
+symbol = "DETH"
+decimals = 18
+max_supply = 10_000_000
+deployed_by_tx = "0xd2645c81130aafea22c638ef35833b72c2960d8d05845b584ee9dc294c3909e7"
+deployed_at_block = 695524
+first_mint_recipient = "0x5230eb6eb7ba5c80335a738beaf8bc"
+
+# Darwin Protocol Accounts (one per basket) — not yet deployed.
+[protocol_accounts]
+# core_crypto = { account_id = "...", deployed_by_tx = "..." }
+# aggressive  = { ... }
+# conservative = { ... }
+
+# Darwin basket-token faucets (DCC, DAG, DCO) — not yet deployed.
+[basket_token_faucets]
+# DCC = { account_id = "...", deployed_by_tx = "..." }
