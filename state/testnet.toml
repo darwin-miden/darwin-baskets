@@ -48,13 +48,25 @@ deployed_by_tx = "0x2d534d2aecc7bded638610b4456780e8bd43c6954b086e7aa0ed4ef0f7c8
 [test_wallet]
 account_id = "0x5230eb6eb7ba5c80335a738beaf8bc"
 
-# Darwin Protocol Accounts (one per basket) — not yet deployed.
-# Blocked on the miden-objects / miden-assembly version skew
-# documented in `darwin-protocol/src/component.rs`.
+# Darwin Protocol Accounts (one per basket). Currently deployed as
+# `RegularAccountUpdatableCode` accounts with placeholder procedure
+# bodies (see `darwin-protocol/crates/darwin-controller-pkg/src/lib.rs`).
+# Real bodies — calling the bundled `darwin::math` / `darwin::nav` /
+# `darwin::mint` / `darwin::fees` / `darwin::redeem` libraries — land
+# once `miden-protocol` ships built against `miden-assembly` 0.23.
 [protocol_accounts]
-# core_crypto  = { account_id = "...", deployed_by_tx = "..." }
-# aggressive   = { account_id = "...", deployed_by_tx = "..." }
-# conservative = { account_id = "...", deployed_by_tx = "..." }
+
+[protocol_accounts.core_crypto]
+account_id = "0xaa20da7d98c2e29022510aa786948f"
+basket     = "DCC"
+
+[protocol_accounts.aggressive]
+account_id = "0x53c54781b7b091905a948b5e3f92fe"
+basket     = "DAG"
+
+[protocol_accounts.conservative]
+account_id = "0xa3a0e023381d709060a19527e73f95"
+basket     = "DCO"
 
 # Darwin basket-token faucets (DCC, DAG, DCO). Currently deployed as
 # standalone FungibleFaucets owned by the Darwin team's signing key.
