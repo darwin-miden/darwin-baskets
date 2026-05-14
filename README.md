@@ -45,6 +45,25 @@ A manifest is valid if and only if:
 
 See `src/validation.rs` for the canonical implementation and the precise error variants.
 
+## Live testnet inventory
+
+The bundled `state/testnet.toml` is the authoritative inventory of every Darwin account on the public Miden testnet (10+ accounts, 20+ on-chain transactions). The Rust loader exposes it via `darwin_baskets::load_testnet()`; the `testnet_inventory` binary prints it as a single-screen summary:
+
+```bash
+cargo run --bin testnet_inventory
+```
+
+Sample output (abridged):
+
+```
+Darwin Protocol — Miden testnet deployment inventory
+Asset faucets (4):     dETH dWBTC dUSDT dDAI
+Basket-token faucets:  DCC DAG DCO
+Protocol accounts:     core_crypto / aggressive / conservative
+Team wallet:           0x5230eb6eb7ba5c80335a738beaf8bc
+User wallet:           0xed3cd5befa3207805f8529207cfc0d  (4 mints)
+```
+
 ## Adding a basket
 
 1. Create `manifests/<name>.toml` following the schema below.
