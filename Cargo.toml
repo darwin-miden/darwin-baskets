@@ -8,5 +8,5 @@ repository = "https://github.com/darwin-miden/darwin-baskets"
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
-toml = "0.8"
-thiserror = "1"
+toml = "1.1"
+thiserror = "2"
