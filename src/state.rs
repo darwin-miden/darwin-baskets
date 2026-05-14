@@ -27,6 +27,18 @@ pub struct TestnetDeployment {
     pub pool_funding: Vec<PoolFundingEntry>,
     #[serde(default, rename = "user_wallet_mints")]
     pub user_wallet_mints: Vec<UserMintEntry>,
+    #[serde(default, rename = "user_deposits")]
+    pub user_deposits: Vec<UserDepositEntry>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct UserDepositEntry {
+    pub basket: String,
+    pub controller_id: String,
+    pub asset: String,
+    pub amount: u64,
+    pub send_tx: String,
+    pub note_id: String,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -157,6 +169,53 @@ mod tests {
                 state.user_wallet_mints.iter().any(|m| m.asset == w),
                 "user wallet missing {} mint",
                 w
+            );
+        }
+    }
+
+    #[test]
+    fn user_wallet_received_all_three_basket_tokens() {
+        let state = load_testnet();
+        // Deliverable #2 of the M1 grant: basket tokens mintable
+        // natively on Miden. The user wallet must have received a
+        // mint from each of DCC, DAG, DCO.
+        for symbol in ["DCC", "DAG", "DCO"] {
+            assert!(
+                state.user_wallet_mints.iter().any(|m| m.asset == symbol),
+                "user wallet missing {} mint",
+                symbol
+            );
+        }
+    }
+
+    #[test]
+    fn user_deposit_table_covers_every_basket() {
+        let state = load_testnet();
+        // The deposit half of Flow A: at least one user-side P2ID
+        // transfer to each basket's controller.
+        for symbol in ["DCC", "DAG", "DCO"] {
+            assert!(
+                state.user_deposits.iter().any(|d| d.basket == symbol),
+                "no user deposit recorded for {}",
+                symbol
+            );
+        }
+    }
+
+    #[test]
+    fn user_deposits_target_known_protocol_accounts() {
+        let state = load_testnet();
+        let known: std::collections::HashSet<String> = state
+            .protocol_accounts
+            .values()
+            .map(|pa| pa.account_id.clone())
+            .collect();
+        for d in &state.user_deposits {
+            assert!(
+                known.contains(&d.controller_id),
+                "deposit {} -> {} targets unknown controller",
+                d.basket,
+                d.controller_id
             );
         }
     }

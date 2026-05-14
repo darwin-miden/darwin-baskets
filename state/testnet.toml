@@ -87,6 +87,62 @@ amount   = 5_000
 mint_tx  = "0x80bd5e309060aed8e95d71af73a32e601b06f894f3f0f9b7aaa4654194befba5"
 note_id  = "0xad4e325186b12b005f9707531e7ca5a3717966b6b494ef4d84219b99a77fa5e7"
 
+# Basket tokens minted by the Darwin basket-token faucets directly
+# into the user wallet. Confirms deliverable #2 of the M1 grant —
+# "Basket tokens mintable and burnable natively on Miden (3 baskets)"
+# — end-to-end on public testnet. Each note was subsequently
+# consumed by the user wallet so the basket tokens now live in its
+# vault.
+[[user_wallet_mints]]
+asset    = "DCC"
+faucet_id = "0x2066f2da1f91ba202af5251d39101c"
+amount   = 100
+mint_tx  = "0x0417d0be28f43d97d5dfb7bf164232ef1d1204b956bc103c655ca251fc9255a3"
+note_id  = "0xa51fff9a41eb748a5cc2fec7471f8e4191bd092a788f77fcda3189a63d92ed01"
+
+[[user_wallet_mints]]
+asset    = "DAG"
+faucet_id = "0xfb6811fd6399df206d44f62800620d"
+amount   = 100
+mint_tx  = "0x9a495d96642881880ff42b7ee0ca2814a06c5a550469d940bebe2244a8800d7a"
+note_id  = "0x96cd69ad9c8a640e2f197a486047929254b482f686c2d590e7d7cc39129d738c"
+
+[[user_wallet_mints]]
+asset    = "DCO"
+faucet_id = "0xbe4efc6729eb3220423b7d6d6a0942"
+amount   = 100
+mint_tx  = "0x4fabcd5279188897f845e41d237f4fd098378e5dc6c7b3c21ed9d68bc684c451"
+note_id  = "0x1cedd094568e59244deda51bc06e09020cc48302c7bbe5601a919f763043d4af"
+
+# Deposit-half-of-Flow-A transactions. The user wallet sends a
+# basket constituent to the corresponding protocol controller via a
+# standard P2ID note. This is the closest the public testnet can run
+# Flow A today — the atomic in-protocol mint that follows is gated
+# on the miden-objects 0.12 → miden-assembly 0.23 realignment.
+[[user_deposits]]
+basket = "DCC"
+controller_id = "0xaa20da7d98c2e29022510aa786948f"
+asset = "dETH"
+amount = 100
+send_tx = "0xd5803e812546430bc5ce7298c52894b3a9b689899554f88ce7c256d11887bb3c"
+note_id = "0xae669fdb782078079285bb5c800b4a9a2f7711785ede35c090a88c942798e840"
+
+[[user_deposits]]
+basket = "DAG"
+controller_id = "0x53c54781b7b091905a948b5e3f92fe"
+asset = "dETH"
+amount = 100
+send_tx = "0x30433f21c18dcc774affdebb9aa74adc389a96fea7d56f571dbc082da34dd6f0"
+note_id = "0x7bd553839c743e2741a776804b030d7b4e6a90af36e5dc45d6da2c114beddb39"
+
+[[user_deposits]]
+basket = "DCO"
+controller_id = "0xa3a0e023381d709060a19527e73f95"
+asset = "dDAI"
+amount = 200
+send_tx = "0xfaf0c587ca82b429c64587f0de73896f6d7069e4cccbb0605ac11d4c9cb8e85a"
+note_id = "0xa3772038bd61818b51a2dfc5e212c3673b75328cb0ac9116668321c7777b229b"
+
 # Darwin Protocol Accounts (one per basket). Currently deployed as
 # `RegularAccountUpdatableCode` accounts with placeholder procedure
 # bodies (see `darwin-protocol/crates/darwin-controller-pkg/src/lib.rs`).

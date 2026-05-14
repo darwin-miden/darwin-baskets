@@ -83,6 +83,21 @@ fn main() {
         }
     }
 
+    if !s.user_deposits.is_empty() {
+        println!();
+        println!(
+            "User → controller deposits (deposit half of Flow A) ({}):",
+            s.user_deposits.len()
+        );
+        for ud in &s.user_deposits {
+            println!(
+                "  {:<5} send {} {} → {}",
+                ud.basket, ud.amount, ud.asset, ud.controller_id
+            );
+            println!("           tx={} note={}", ud.send_tx, ud.note_id);
+        }
+    }
+
     println!();
     println!(
         "Total: {} on-chain accounts, {} pool-funding mints, {} user-wallet mints.",
