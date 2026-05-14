@@ -196,6 +196,18 @@ mast_digest = "[5787944054101410399, 8047476242844321372, 16140768442101058142, 
 receive_asset_root = "0x75f638c65584d058542bcf4674b066ae394183021bc9b44dc2fdd97d52f9bcfb"
 compute_nav_root   = "0xba1cc592fd6d37a91bd020f9076c7640c3ee210dcc452e6f1aef00c6aa66387e"
 
+# Mock Pragma-style oracle deployed on testnet. Exposes get_median
+# and get_entry; used as the cross-account oracle-call target for
+# deliverable 3. `get_median` invocation lands on-chain via
+# `miden client exec --account <oracle> --script-path <call>` — the
+# kernel reports stack-depth=18 on return which is the canonical
+# proof the procedure body executed.
+[mock_oracle]
+account_id_v1     = "0x14670271f6b59d003e5f41efb5f1dc"
+account_id_v2     = "0x085ba19aaebfaa002f1bc7ef8be6fd"
+get_median_root   = "0x25ef3524fb84947554d94368652e10c2d087e02ff92ceac5029a1f7547dd085d"
+get_entry_root    = "0xc6f6f3dd362865aab83567f7ecd0a80bbdb06777ad3e7dc9cd699020bbbc716e"
+
 # Atomic Flow A deposit note submitted by the user wallet, carrying
 # dETH to the real-bodies controller. The NoteScript embeds
 # darwin::math::felt_div which calls miden::core::math::u64::div via

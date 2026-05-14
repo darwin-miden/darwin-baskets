@@ -31,6 +31,16 @@ pub struct TestnetDeployment {
     pub user_deposits: Vec<UserDepositEntry>,
     #[serde(default, rename = "atomic_flow_a_notes")]
     pub atomic_flow_a_notes: Vec<AtomicFlowANoteEntry>,
+    #[serde(default)]
+    pub mock_oracle: Option<MockOracleEntry>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct MockOracleEntry {
+    pub account_id_v1: String,
+    pub account_id_v2: String,
+    pub get_median_root: String,
+    pub get_entry_root: String,
 }
 
 #[derive(Debug, Clone, Deserialize)]
