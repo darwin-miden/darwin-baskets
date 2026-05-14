@@ -67,6 +67,26 @@ amount   = 5_000
 mint_tx  = "0xdf09fbe2607f42fdfe2faa8197c64a9b62e738af48061b7a45b236c4e2fec095"
 note_id  = "0xa35ab1642a5ab12829ddca56e9b31043c121ae3592af922a53b86307414d9ff3"
 
+[[user_wallet_mints]]
+asset    = "dWBTC"
+faucet_id = "0x7a45cb24ada22120246bcf54196e12"
+amount   = 5_000
+mint_tx  = "0x790dd4ce2ad2ac4a646a125c7859ccb143a745b15b320e9ad5aee5dddeae30d5"
+
+[[user_wallet_mints]]
+asset    = "dUSDT"
+faucet_id = "0xd3789f451ddd4720602ba9eb1a268d"
+amount   = 5_000
+mint_tx  = "0x2cc1161138be967d0fd0e1ec134cede8a6c53a5fd929141e2c54ec08d020b309"
+note_id  = "0x01d5f4b19cc661db415dc3bc6bf1a4e91bd4e06aeabb00a117f8599e68da24fd"
+
+[[user_wallet_mints]]
+asset    = "dDAI"
+faucet_id = "0xb526deb0408a29207e4f27ed57bf1a"
+amount   = 5_000
+mint_tx  = "0x80bd5e309060aed8e95d71af73a32e601b06f894f3f0f9b7aaa4654194befba5"
+note_id  = "0xad4e325186b12b005f9707531e7ca5a3717966b6b494ef4d84219b99a77fa5e7"
+
 # Darwin Protocol Accounts (one per basket). Currently deployed as
 # `RegularAccountUpdatableCode` accounts with placeholder procedure
 # bodies (see `darwin-protocol/crates/darwin-controller-pkg/src/lib.rs`).
