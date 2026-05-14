@@ -63,3 +63,77 @@ fn load_bundled(contents: &str) -> BasketManifest {
         .expect("bundled basket manifest must pass validation");
     manifest
 }
+
+#[cfg(test)]
+mod cross_manifest_tests {
+    use super::*;
+
+    #[test]
+    fn all_m1_symbols_round_trip_through_by_symbol() {
+        for basket in all_m1() {
+            let resolved = by_symbol(&basket.symbol).expect("symbol resolves");
+            assert_eq!(resolved.symbol, basket.symbol);
+            assert_eq!(resolved.name, basket.name);
+            assert_eq!(
+                resolved.constituents.len(),
+                basket.constituents.len(),
+                "{} constituent count round-trips",
+                basket.symbol,
+            );
+        }
+    }
+
+    #[test]
+    fn unknown_symbol_returns_none() {
+        assert!(by_symbol("XYZ").is_none());
+        assert!(by_symbol("").is_none());
+    }
+
+    #[test]
+    fn faucet_aliases_cover_every_constituent_exactly_once() {
+        let aliases = all_m1_faucet_aliases();
+        // No duplicates.
+        let mut sorted = aliases.clone();
+        sorted.sort();
+        sorted.dedup();
+        assert_eq!(aliases, sorted);
+        // Every alias in any manifest is present in the index.
+        for basket in all_m1() {
+            for c in &basket.constituents {
+                assert!(
+                    aliases.contains(&c.faucet_alias),
+                    "alias {} missing from all_m1_faucet_aliases()",
+                    c.faucet_alias
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn every_basket_weights_sum_to_ten_thousand() {
+        for basket in all_m1() {
+            let sum: u32 = basket
+                .constituents
+                .iter()
+                .map(|c| c.target_weight_bps)
+                .sum();
+            assert_eq!(sum, 10_000, "{} weights don't sum to 10000", basket.symbol);
+        }
+    }
+
+    #[test]
+    fn every_basket_uses_a_supported_pragma_pair() {
+        let supported = ["BTC/USD", "ETH/USD", "WBTC/USD", "USDT/USD", "DAI/USD"];
+        for basket in all_m1() {
+            for c in &basket.constituents {
+                assert!(
+                    supported.contains(&c.pragma_pair.as_str()),
+                    "{} / {}: pair '{}' is not in the M1 supported list",
+                    basket.symbol,
+                    c.faucet_alias,
+                    c.pragma_pair,
+                );
+            }
+        }
+    }
+}
