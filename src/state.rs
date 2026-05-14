@@ -36,7 +36,8 @@ pub struct TestnetDeployment {
 #[derive(Debug, Clone, Deserialize)]
 pub struct AtomicFlowANoteEntry {
     pub note_id: String,
-    pub note_script_root: String,
+    #[serde(default)]
+    pub note_script_root: Option<String>,
     pub sender_wallet: String,
     pub target_controller: String,
     pub asset: String,
@@ -44,6 +45,8 @@ pub struct AtomicFlowANoteEntry {
     pub amount: u64,
     pub submit_tx: String,
     pub submission_block: u64,
+    #[serde(default)]
+    pub note_inputs: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
