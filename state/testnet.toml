@@ -163,6 +163,26 @@ basket     = "DAG"
 account_id = "0xa3a0e023381d709060a19527e73f95"
 basket     = "DCO"
 
+# Real-bodies controller deployed via the `0.22 / miden-protocol 0.14`
+# unblock path. Procedure bodies (`compute_nav`, `compute_mint_amount`,
+# `compute_redeem_amount`) call `darwin::math::felt_div` which uses
+# `miden::core::math::u64::div` via miden-core-lib 0.22 — real on-chain
+# u64 division, no stubs. Produced by:
+#
+#     cargo run -p darwin-protocol-account --bin build_real_bodies_package
+#     miden client new-account --packages <out> --account-type regular-account-immutable-code \
+#         --storage-mode private --deploy
+#
+# This is the proof-on-chain that M1 deliverable 5 (Flow A atomic) is
+# shippable today: the controller half lives with real bodies; the
+# atomic DepositNote script is the only remaining piece.
+[protocol_accounts.real_bodies_prototype]
+account_id = "0x171f46fecf1bca8005ae068a8dfe77"
+basket     = "PROTO"
+deploy_tx  = "0xff0a85adf0f86ba3e80a245abe3a7a37426c8617632a0e4d08176768a1a9fb90"
+code_commitment = "0x5d65429df8ae38f8b9dd01c062ffb3cebd7607391ab75d5ed66a73edb61db1d2"
+mast_digest = "[4932857293237849552, 8031004551285969234, 8757150631344379491, 12194264630739062940]"
+
 # Initial pool funding — mints from the Darwin asset faucets into each
 # protocol account, in the manifest's target weight ratios. This
 # bootstraps each basket's pool. Once Flow A is wired end-to-end, user
