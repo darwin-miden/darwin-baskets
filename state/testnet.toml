@@ -68,6 +68,65 @@ basket     = "DAG"
 account_id = "0xa3a0e023381d709060a19527e73f95"
 basket     = "DCO"
 
+# Initial pool funding — mints from the Darwin asset faucets into each
+# protocol account, in the manifest's target weight ratios. This
+# bootstraps each basket's pool. Once Flow A is wired end-to-end, user
+# DepositNotes top up these pools.
+
+[[pool_funding]]
+basket    = "DCC"
+asset     = "dWBTC"
+amount    = 40_000
+mint_tx   = "0x9941791ad440aa6a742106026b6c0bc91431425372c2b471de1c2974d1692a7a"
+
+[[pool_funding]]
+basket    = "DCC"
+asset     = "dETH"
+amount    = 40_000
+mint_tx   = "0x9730b5b9b7081094bb971ef839961fc3445d6c9d4187740e47548a6fe4a19bf1"
+
+[[pool_funding]]
+basket    = "DCC"
+asset     = "dUSDT"
+amount    = 20_000
+mint_tx   = "0xde4b059d467f591a9e448f20c8ac13030dac734f198ff7dd923d26c7523dc6e5"
+
+[[pool_funding]]
+basket    = "DAG"
+asset     = "dWBTC"
+amount    = 50_000
+mint_tx   = "0x9423835a14d0e6f851ab40621eab46fe185fdada2fecc46a25feed441e560102"
+
+[[pool_funding]]
+basket    = "DAG"
+asset     = "dETH"
+amount    = 50_000
+mint_tx   = "0xf8181532948932e15cdc043747a88cc9ff932bb6b4d41829762a0cb717afbfbb"
+
+[[pool_funding]]
+basket    = "DCO"
+asset     = "dWBTC"
+amount    = 10_000
+mint_tx   = "0x3eb283d59991640fd78f9a347164c1dac8c43533a1d10b71be14e30bd91f37c3"
+
+[[pool_funding]]
+basket    = "DCO"
+asset     = "dETH"
+amount    = 10_000
+mint_tx   = "0x90d889979b293c5becf7edb1d7fca53c035c8bd48081995b2776e3f48013ebaf"
+
+[[pool_funding]]
+basket    = "DCO"
+asset     = "dUSDT"
+amount    = 40_000
+mint_tx   = "0x6343b4196b663a38463eac89d619bf9d1945bfece91642d1a4975e9af9a513b5"
+
+[[pool_funding]]
+basket    = "DCO"
+asset     = "dDAI"
+amount    = 40_000
+mint_tx   = "0x604e0587a11e4c1af8bbc8701ae7dd611b4eb57281bc892fb87d5f344a549a2d"
+
 # Darwin basket-token faucets (DCC, DAG, DCO). Currently deployed as
 # standalone FungibleFaucets owned by the Darwin team's signing key.
 # Once the protocol-account version skew is unblocked, ownership
