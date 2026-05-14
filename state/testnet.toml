@@ -48,6 +48,15 @@ deployed_by_tx = "0x2d534d2aecc7bded638610b4456780e8bd43c6954b086e7aa0ed4ef0f7c8
 [test_wallet]
 account_id = "0x5230eb6eb7ba5c80335a738beaf8bc"
 
+# A second wallet that simulates an end-user in Flow A. Used to
+# exercise the wallet → controller deposit path once the controller
+# bodies wire in. The team wallet has pre-funded it via a P2ID
+# transfer so the user has assets to deposit.
+[user_wallet]
+account_id      = "0xed3cd5befa3207805f8529207cfc0d"
+first_p2id_tx   = "0xfe0a531e20900297ab6e29ad92cff71e3669dc6d727a76c3b66337043c116bea"
+first_p2id_asset = "1_000_000 base units of public faucet 0x0a7d175ed63ec5200fb2ced86f6aa5"
+
 # Darwin Protocol Accounts (one per basket). Currently deployed as
 # `RegularAccountUpdatableCode` accounts with placeholder procedure
 # bodies (see `darwin-protocol/crates/darwin-controller-pkg/src/lib.rs`).
