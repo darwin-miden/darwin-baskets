@@ -81,7 +81,10 @@ fn rejects_weight_sum_mismatch() {
     let m = BasketManifest::from_toml_str(toml).expect("parses");
     assert!(matches!(
         m.validate(),
-        Err(ValidationError::WeightSumMismatch { sum: 6000, expected: 10_000 })
+        Err(ValidationError::WeightSumMismatch {
+            sum: 6000,
+            expected: 10_000
+        })
     ));
 }
 
@@ -142,7 +145,10 @@ fn rejects_invalid_symbol() {
         management_fee_bps_year = 100
     "#;
     let m = BasketManifest::from_toml_str(toml).expect("parses");
-    assert!(matches!(m.validate(), Err(ValidationError::InvalidSymbol(_))));
+    assert!(matches!(
+        m.validate(),
+        Err(ValidationError::InvalidSymbol(_))
+    ));
 }
 
 #[test]

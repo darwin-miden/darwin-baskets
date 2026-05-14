@@ -8,9 +8,7 @@
 mod manifest;
 mod validation;
 
-pub use manifest::{
-    BasketFees, BasketManifest, BasketRebalancing, Constituent, ManifestFile,
-};
+pub use manifest::{BasketFees, BasketManifest, BasketRebalancing, Constituent, ManifestFile};
 pub use validation::ValidationError;
 
 /// Returns the manifest of the Core Crypto basket bundled with this crate.
@@ -34,8 +32,8 @@ pub fn all_m1() -> [BasketManifest; 3] {
 }
 
 fn load_bundled(contents: &str) -> BasketManifest {
-    let manifest = BasketManifest::from_toml_str(contents)
-        .expect("bundled basket manifest must parse");
+    let manifest =
+        BasketManifest::from_toml_str(contents).expect("bundled basket manifest must parse");
     manifest
         .validate()
         .expect("bundled basket manifest must pass validation");

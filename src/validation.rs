@@ -22,17 +22,17 @@ pub enum ValidationError {
     #[error("constituent {alias} has weight 0")]
     ZeroWeight { alias: String },
 
-    #[error(
-        "constituent weights sum to {sum} bps; must equal {expected} bps"
-    )]
+    #[error("constituent weights sum to {sum} bps; must equal {expected} bps")]
     WeightSumMismatch { sum: u32, expected: u32 },
 
     #[error("fee {field} is {value} bps; must be <= {max} bps")]
-    FeeOutOfRange { field: &'static str, value: u32, max: u32 },
+    FeeOutOfRange {
+        field: &'static str,
+        value: u32,
+        max: u32,
+    },
 
-    #[error(
-        "drift threshold is {value} bps; must be > 0 and <= {max} bps"
-    )]
+    #[error("drift threshold is {value} bps; must be > 0 and <= {max} bps")]
     DriftOutOfRange { value: u32, max: u32 },
 
     #[error("basket symbol must be 1-5 ASCII uppercase characters; got {0:?}")]
@@ -53,7 +53,9 @@ pub(crate) fn validate(m: &BasketManifest) -> Result<(), ValidationError> {
     let mut seen = std::collections::HashSet::new();
     for c in &m.constituents {
         if !seen.insert(c.faucet_alias.as_str()) {
-            return Err(ValidationError::DuplicateConstituent(c.faucet_alias.clone()));
+            return Err(ValidationError::DuplicateConstituent(
+                c.faucet_alias.clone(),
+            ));
         }
         if c.target_weight_bps == 0 {
             return Err(ValidationError::ZeroWeight {
@@ -86,7 +88,9 @@ pub(crate) fn validate(m: &BasketManifest) -> Result<(), ValidationError> {
     check_version(&m.version)?;
 
     if m.basket_faucet_decimals > 18 {
-        return Err(ValidationError::DecimalsOutOfRange(m.basket_faucet_decimals));
+        return Err(ValidationError::DecimalsOutOfRange(
+            m.basket_faucet_decimals,
+        ));
     }
 
     Ok(())
@@ -116,7 +120,10 @@ fn check_version(version: &str) -> Result<(), ValidationError> {
     if parts.len() != 3 {
         return Err(ValidationError::InvalidVersion(version.to_string()));
     }
-    if !parts.iter().all(|p| !p.is_empty() && p.bytes().all(|b| b.is_ascii_digit())) {
+    if !parts
+        .iter()
+        .all(|p| !p.is_empty() && p.bytes().all(|b| b.is_ascii_digit()))
+    {
         return Err(ValidationError::InvalidVersion(version.to_string()));
     }
     Ok(())
