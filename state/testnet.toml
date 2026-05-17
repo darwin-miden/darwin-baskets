@@ -221,6 +221,24 @@ account_id_v2     = "0x085ba19aaebfaa002f1bc7ef8be6fd"
 get_median_root   = "0x25ef3524fb84947554d94368652e10c2d087e02ff92ceac5029a1f7547dd085d"
 get_entry_root    = "0xc6f6f3dd362865aab83567f7ecd0a80bbdb06777ad3e7dc9cd699020bbbc716e"
 
+# Live Pragma oracle on Miden testnet. Identity observed at
+# https://miden.pragma.build, MAST roots computed locally by re-running
+# Pragma's build pipeline via darwin-oracle-adapter::pragma_live. Darwin
+# proves end-to-end live read via
+# `cargo run -p darwin-protocol-account --features pragma-live --bin oracle_query_real -- --pair ETH/USD`
+# which returns found=1 and a plausible median price (e.g. ETH ≈ $2193.85
+# at the snapshot moment).
+[pragma_live]
+oracle_account_hex     = "0xd0e1384e21a6350029d80128eb5c44"
+oracle_account_bech32  = "mtst1argwzwzwyxnr2qpfmqqj366ugsax2t3x"
+publisher_bech32       = "mtst1aqhn4fnd8x8duqr9y4ku23qqwyzdndw3"
+get_median_mast_root   = "0xd1aa2a8b38ccf58f37bb7aa490a8154c1cf89c537144ab23bd1111f13e5a28e8"
+publisher_get_entry_mast_root = "0x0bd879dc18f8f1a919f25eb94b611e99a32d1884a4378868bd9d45bb0e73b272"
+verified_pair          = "ETH/USD"
+verified_median_x1e8   = 219384947828
+verified_pair_btc      = "BTC/USD"
+verified_median_btc_x1e8 = 7832666893426
+
 # Atomic Flow A deposit note submitted by the user wallet, carrying
 # dETH to the real-bodies controller. The NoteScript embeds
 # darwin::math::felt_div which calls miden::core::math::u64::div via
