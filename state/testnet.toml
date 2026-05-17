@@ -250,6 +250,17 @@ submission_block  = 782141
 consume_tx        = "0xaf8521f24c2a06f05b0512f632e64843e2b9399ad23a6e6c3cce4434c0b402f8"
 consume_block     = 782152
 
+# Darwin Relay operator wallet on Miden — M2 iter 4 (darwin-relay).
+# Holds bridged assets coming from the ETH-side DarwinRelayDeposit
+# escrow contract, then forwards them to the v4 controller via a
+# DepositNote. Falcon-512 key in the operator's local keystore.
+[relay_wallet]
+account_id     = "0x9e7c22c3ffb68e8048619a8e9afa41"
+account_bech32 = "mtst1az08cgkrl7mgaqzgvxdgaxh6gys9y7vv_qr7qqq9wr6w"
+deployed_via   = "miden client new-wallet --storage-mode private --deploy"
+storage_mode   = "private"
+role           = "darwin-relay operator wallet (ETH user onboarding)"
+
 [pragma_live]
 oracle_account_hex     = "0xd0e1384e21a6350029d80128eb5c44"
 oracle_account_bech32  = "mtst1argwzwzwyxnr2qpfmqqj366ugsax2t3x"
