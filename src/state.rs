@@ -167,8 +167,9 @@ mod tests {
     #[test]
     fn every_protocol_account_corresponds_to_a_known_basket() {
         let state = load_testnet();
-        // PROTO / PROTO2 are deployment-tooling prototypes, not M1 baskets.
-        let valid_baskets: Vec<&'static str> = vec!["DCC", "DAG", "DCO", "PROTO", "PROTO2"];
+        // PROTO* are deployment-tooling prototypes, not M1 baskets.
+        let valid_baskets: Vec<&'static str> =
+            vec!["DCC", "DAG", "DCO", "PROTO", "PROTO2", "PROTO3"];
         for (k, pa) in &state.protocol_accounts {
             assert!(
                 valid_baskets.contains(&pa.basket.as_str()),

@@ -196,6 +196,19 @@ mast_digest = "[5787944054101410399, 8047476242844321372, 16140768442101058142, 
 receive_asset_root = "0x75f638c65584d058542bcf4674b066ae394183021bc9b44dc2fdd97d52f9bcfb"
 compute_nav_root   = "0xba1cc592fd6d37a91bd020f9076c7640c3ee210dcc452e6f1aef00c6aa66387e"
 
+# v3 storage-aware controller. Adds read_pool_position that reads from
+# slot 2 (pool_positions StorageMap) via active_account::get_map_item.
+# This is the on-chain primitive the M2 rebalance bot needs to fetch
+# live pool positions without the caller passing them in. v2 procs
+# are preserved so existing notes still target v3 with no script
+# changes.
+[protocol_accounts.real_bodies_v3]
+account_id = "0xcc33bbfe063efb806141336e041b01"
+basket     = "PROTO3"
+read_pool_position_root    = "0xa65d0fbf44233acb3d5b8e2df347c2118c4523d6d465755d507c2b0e0f614225"
+apply_deposit_storage_root = "0x509aa45f9d8e3dd96ff1f01de50c724de43b232f839d3d57266166068f526a6d"
+receive_asset_root         = "0x75f638c65584d058542bcf4674b066ae394183021bc9b44dc2fdd97d52f9bcfb"
+
 # Mock Pragma-style oracle deployed on testnet. Exposes get_median
 # and get_entry; used as the cross-account oracle-call target for
 # deliverable 3. `get_median` invocation lands on-chain via
