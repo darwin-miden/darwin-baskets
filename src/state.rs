@@ -31,6 +31,10 @@ pub struct TestnetDeployment {
     pub user_deposits: Vec<UserDepositEntry>,
     #[serde(default, rename = "atomic_flow_a_notes")]
     pub atomic_flow_a_notes: Vec<AtomicFlowANoteEntry>,
+    /// Flow C Path 2 (Miden-native redeem) notes — same shape as
+    /// Flow A entries since both halves are atomic-note flows.
+    #[serde(default, rename = "atomic_flow_c_notes")]
+    pub atomic_flow_c_notes: Vec<AtomicFlowANoteEntry>,
     #[serde(default)]
     pub mock_oracle: Option<MockOracleEntry>,
 }

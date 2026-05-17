@@ -267,6 +267,26 @@ consume_block     = 703322
 note_inputs       = "deposit_value=100*1e8, fee_factor=9970, nav=2e11"
 # Post-consume: 100 dETH live in controller 0xa25aa0b00007688024b74b05a52aab vault.
 
+# Atomic Flow C Path 2 — symmetric Miden-native redeem. User wallet
+# emits a RedeemNote carrying 50 DCC to the v2 controller; the
+# controller consumes it on-chain. darwin::math::felt_div runs
+# inside the controller tx context, then the DCC drains into the
+# controllers vault via call.receive_asset. Verified live: the v2
+# controllers vault holds 100 dETH (from Flow A) + 50 DCC (from
+# this Flow C run).
+[[atomic_flow_c_notes]]
+note_id           = "0xb9797a4b409f1051578c5658666682338bc59d9b7c6ef575a02f001a6c655cb0"
+sender_wallet     = "0xed3cd5befa3207805f8529207cfc0d"
+target_controller = "0xa25aa0b00007688024b74b05a52aab"
+asset             = "DCC"
+asset_faucet_id   = "0x2066f2da1f91ba202af5251d39101c"
+amount            = 50
+submit_tx         = "0xd670066e796ed96ae30ef452392661b0029a4450af97037453c2fc1b6713908f"
+submission_block  = 777137
+consume_tx        = "0x005c4eec575800d251c12d84eeaa6cc1f2ffd98d090c291161f45e9e2e2a7800"
+consume_block     = 777149
+note_inputs       = "burn_amount=50, fee_factor=9970, scale=1"
+
 # Initial pool funding — mints from the Darwin asset faucets into each
 # protocol account, in the manifest's target weight ratios. This
 # bootstraps each basket's pool. Once Flow A is wired end-to-end, user
