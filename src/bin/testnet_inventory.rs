@@ -1,8 +1,8 @@
 //! Print the bundled `state/testnet.toml` as a human-readable summary.
 //!
-//! Same data the Miden grant reviewer can see on
-//! `testnet.midenscan.com` — but laid out in a single screen so the
-//! state is easy to audit alongside the deployment recipe in
+//! Same data anyone can see on `testnet.midenscan.com` — but laid
+//! out in a single screen so the state is easy to audit alongside
+//! the deployment recipe in
 //! `darwin-infra/scripts/deploy-testnet.sh`.
 //!
 //! Usage:

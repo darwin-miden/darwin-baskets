@@ -214,9 +214,8 @@ mod tests {
     #[test]
     fn user_wallet_received_all_three_basket_tokens() {
         let state = load_testnet();
-        // Deliverable #2 of the M1 grant: basket tokens mintable
-        // natively on Miden. The user wallet must have received a
-        // mint from each of DCC, DAG, DCO.
+        // Basket tokens are mintable natively on Miden. The user
+        // wallet must have received a mint from each of DCC, DAG, DCO.
         for symbol in ["DCC", "DAG", "DCO"] {
             assert!(
                 state.user_wallet_mints.iter().any(|m| m.asset == symbol),

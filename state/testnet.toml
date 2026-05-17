@@ -88,7 +88,7 @@ mint_tx  = "0x80bd5e309060aed8e95d71af73a32e601b06f894f3f0f9b7aaa4654194befba5"
 note_id  = "0xad4e325186b12b005f9707531e7ca5a3717966b6b494ef4d84219b99a77fa5e7"
 
 # Basket tokens minted by the Darwin basket-token faucets directly
-# into the user wallet. Confirms deliverable #2 of the M1 grant —
+# into the user wallet. Confirms the native mint/burn primitive —
 # "Basket tokens mintable and burnable natively on Miden (3 baskets)"
 # — end-to-end on public testnet. Each note was subsequently
 # consumed by the user wallet so the basket tokens now live in its
@@ -173,9 +173,9 @@ basket     = "DCO"
 #     miden client new-account --packages <out> --account-type regular-account-immutable-code \
 #         --storage-mode private --deploy
 #
-# This is the proof-on-chain that M1 deliverable 5 (Flow A atomic) is
-# shippable today: the controller half lives with real bodies; the
-# atomic DepositNote script is the only remaining piece.
+# Proof-on-chain that atomic Flow A is shippable today: the
+# controller half lives with real bodies; the atomic DepositNote
+# script is the only remaining piece.
 [protocol_accounts.real_bodies_prototype]
 account_id = "0x171f46fecf1bca8005ae068a8dfe77"
 basket     = "PROTO"
@@ -210,8 +210,8 @@ apply_deposit_storage_root = "0x509aa45f9d8e3dd96ff1f01de50c724de43b232f839d3d57
 receive_asset_root         = "0x75f638c65584d058542bcf4674b066ae394183021bc9b44dc2fdd97d52f9bcfb"
 
 # Mock Pragma-style oracle deployed on testnet. Exposes get_median
-# and get_entry; used as the cross-account oracle-call target for
-# deliverable 3. `get_median` invocation lands on-chain via
+# and get_entry; used as the cross-account oracle-call target for the
+# fallback path. get_median invocation lands on-chain via
 # `miden client exec --account <oracle> --script-path <call>` — the
 # kernel reports stack-depth=18 on return which is the canonical
 # proof the procedure body executed.
