@@ -228,6 +228,28 @@ get_entry_root    = "0xc6f6f3dd362865aab83567f7ecd0a80bbdb06777ad3e7dc9cd699020b
 # `cargo run -p darwin-protocol-account --features pragma-live --bin oracle_query_real -- --pair ETH/USD`
 # which returns found=1 and a plausible median price (e.g. ETH ≈ $2193.85
 # at the snapshot moment).
+# v4 rebalance-aware controller — M2 Track 3. Strict superset of v3:
+# adds `execute_rebalance_step` (MAST root
+# 0xddff122fa9aff9c1e5b5c253b509d24a795a9ad709f32d54e91eb53a77b84c53),
+# the entry point a Flow B trigger note calls into.
+[protocol_accounts.real_bodies_v4]
+account_id     = "0x1975a9aa8572f8804fb38bee09fbdf"
+deployed_via   = "miden client new-account --packages darwin-v4-rebalance-controller.masp --storage-mode private --deploy"
+
+# Flow B end-to-end run on Miden testnet (2026-05-17). User wallet
+# emits the rebalance trigger note (zero assets, calls into the v4
+# controller's execute_rebalance_step). v4 controller consumes it.
+# Proves the M2 §2 rebalance trigger path lands on-chain.
+[[flow_b_runs]]
+note_id           = "0x6d77db31a501b4ff1a6807953858038d7d4c83c6beb7aece19d5f80ca11e27fe"
+sender_wallet     = "0xed3cd5befa3207805f8529207cfc0d"
+target_controller = "0x1975a9aa8572f8804fb38bee09fbdf"
+basket_id         = 1
+submit_tx         = "0xdd1a97b9170623463e642dfbce86abc94be6315d3755c3c033fe51ca373b037d"
+submission_block  = 782141
+consume_tx        = "0xaf8521f24c2a06f05b0512f632e64843e2b9399ad23a6e6c3cce4434c0b402f8"
+consume_block     = 782152
+
 [pragma_live]
 oracle_account_hex     = "0xd0e1384e21a6350029d80128eb5c44"
 oracle_account_bech32  = "mtst1argwzwzwyxnr2qpfmqqj366ugsax2t3x"
